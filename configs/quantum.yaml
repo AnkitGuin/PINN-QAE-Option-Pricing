@@ -1,0 +1,26 @@
+# Quantum pricing module settings.
+# The QAE variant is fixed BEFORE evaluation (canonical Brassard et al. QAE,
+# simulator-based). Grid rules, payoff scaling and estimation settings are held
+# fixed across all input parameter sets so that differences in QAE output are
+# attributable to calibration inputs, not to quantum settings.
+quantum:
+  distribution:
+    n_qubits: 4                 # 2^4 = 16 grid points for the risk-neutral distribution
+    truncation_quantile: 0.001  # bounds = [q_(0.001), q_(0.999)] of lognormal(S_T)
+  payoff:
+    # P_max rule: P_max = S_max - K (>= max grid payoff for a call).
+    scale: s_max_minus_k
+  qae:
+    variant: canonical          # Brassard/Hoyer/Mosca/Tapp canonical QAE
+    evaluation_qubits: 3        # m; estimation resolution ~ pi/2^(m+1) in theta
+    mode: shots                 # shots | statevector (statevector = deterministic validation)
+    shots: 4096
+    simulator_seed: 7
+    post_processing: mle        # maximum-likelihood over theta grid (exact outcome distribution)
+    theta_grid_points: 20001
+  resources:
+    transpile_optimization_level: 1
+  monte_carlo:
+    # Classical MC used in the quantum comparison (identical distribution).
+    path_counts: [1000, 10000, 100000, 1000000]
+    n_repeats: 20

@@ -1,0 +1,72 @@
+{
+  "layout": {
+    "evaluation_qubits": [
+      0,
+      1,
+      2
+    ],
+    "grid_qubits": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "objective_qubit": 7,
+    "total_qubits": 8
+  },
+  "n_grid_qubits": 4,
+  "n_evaluation_qubits": 3,
+  "total_circuit_qubits": 8,
+  "state_preparation_a": {
+    "qubits": 5,
+    "depth": 53,
+    "size": 57,
+    "gate_counts": {
+      "u": 31,
+      "cx": 26
+    },
+    "transpilation_seconds": 0.016249695001533837
+  },
+  "grover_q": {
+    "qubits": 5,
+    "depth": 169,
+    "size": 188,
+    "gate_counts": {
+      "u": 100,
+      "cx": 88
+    },
+    "transpilation_seconds": 0.030347621999680996
+  },
+  "full_qae_circuit": {
+    "qubits": 8,
+    "depth": 9904,
+    "size": 11968,
+    "gate_counts": {
+      "u": 6687,
+      "cx": 5278,
+      "measure": 3
+    },
+    "transpilation_seconds": 0.0516599029997451
+  },
+  "shots": 4096,
+  "grover_applications_per_shot": 7,
+  "total_grover_queries": 28672,
+  "total_a_applications": 4096,
+  "theoretical_theta_resolution": 0.19634954084936207,
+  "note": "A embeds distribution loading AND payoff encoding exactly via StatePreparation; its transpiled cost is reported and is large. Simulator resources do not establish hardware quantum advantage.",
+  "aer_execution": {
+    "status": "ok",
+    "runtime_seconds": 0.1644363709983736,
+    "shots": 4096,
+    "counts": {
+      "0": 46,
+      "1": 1995,
+      "2": 19,
+      "3": 6,
+      "4": 3,
+      "5": 1,
+      "6": 12,
+      "7": 2014
+    }
+  }
+}

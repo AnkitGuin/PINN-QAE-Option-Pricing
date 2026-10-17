@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pinn-qae-option-pricing"
+version = "1.0.0"
+description = "Physics-informed neural networks for adaptive quantum option pricing under time-varying market conditions (research implementation)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+    "numpy>=2.0,<3",
+    "scipy>=1.14",
+    "pandas>=2.2",
+    "pyyaml>=6.0",
+    "matplotlib>=3.9",
+    "torch>=2.4",
+    "qiskit>=2.0,<3",
+    "qiskit-aer>=0.15",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[tool.setuptools.packages.find]
+include = ["src*", "experiments*", "tests*", "scripts*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

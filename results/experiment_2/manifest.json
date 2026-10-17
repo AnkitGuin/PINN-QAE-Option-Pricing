@@ -1,0 +1,26 @@
+{
+  "config_hash": "c30067fa8a71e0b0513273a2b6a18279dcfccf43318394ec7dab18b30f2d16a1",
+  "dataset_version": null,
+  "device": "cpu",
+  "environment": {
+    "cpu_count": 2,
+    "machine": "x86_64",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "platform": "Linux-6.1.158+-x86_64-with-glibc2.41",
+    "processor": "",
+    "python": "3.13.16",
+    "qiskit": "2.6.0",
+    "qiskit_aer": null,
+    "scipy": "1.17.1",
+    "seed": 0,
+    "timestamp_utc": "2026-10-17T09:46:38.603186+00:00",
+    "torch": "2.14.1+cpu",
+    "torch_cuda_available": false
+  },
+  "experiment": "exp2_inverse_pinn",
+  "n_blocks": 2400,
+  "n_runs": 30,
+  "seed": 0,
+  "status": "completed"
+}

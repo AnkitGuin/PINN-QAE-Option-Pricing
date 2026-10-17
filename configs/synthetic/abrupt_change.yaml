@@ -1,0 +1,33 @@
+# Scenario C — abrupt regime changes in pricing volatility: 20% -> 35% -> 18%.
+synthetic:
+  scenario: abrupt_change
+  n_dates: 120
+  start_date: "2025-01-01"
+  underlying: SYNTH
+  currency: USD
+  option_type: call
+  spot:
+    s0: 100.0
+    drift_annual: 0.03
+    realized_vol_annual: 0.10
+  rate_schedule:
+    kind: constant
+    value: 0.05
+  vol_schedule:
+    kind: piecewise_constant
+    segments:
+      - {sigma: 0.20, n_dates: 40, regime: low_vol_1}
+      - {sigma: 0.35, n_dates: 40, regime: high_vol}
+      - {sigma: 0.18, n_dates: 40, regime: low_vol_2}
+  maturities: [0.10, 0.25, 0.50, 0.75, 1.00]
+  moneyness:
+    min: 0.85
+    max: 1.15
+    n: 9
+  noise:
+    mode: none
+    relative_std: 0.0
+  spreads:
+    relative: 0.01
+    absolute: 0.05
+  observation_dropout: 0.0

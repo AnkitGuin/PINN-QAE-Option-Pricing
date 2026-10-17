@@ -1,0 +1,46 @@
+includes: ["base.yaml", "pinn.yaml"]
+
+experiment:
+  name: exp1_forward_pinn
+  id: experiment_1
+  description: >-
+    Gate 4: forward PINN with externally known parameters must reproduce the
+    analytical Black-Scholes surface within pre-declared tolerances.
+  output_dir: results/experiment_1
+
+exp1:
+  known_parameters:
+    sigma: 0.20
+    rate: 0.05
+  domain:
+    # Pricing domain for training and evaluation (fixed a priori).
+    s_min: 60.0
+    s_max: 160.0
+    tau_min: 0.02
+    tau_max: 1.00
+    k_min: 85.0
+    k_max: 115.0
+    rate: 0.05
+  training:
+    # Single fit, so a larger epoch budget than rolling recalibration.
+    epochs: 4000
+    early_stopping:
+      enabled: true
+      patience: 600
+      min_delta: 1.0e-10
+    collocation:
+      n_interior: 1024
+      n_boundary: 256
+      n_terminal: 256
+      tau_min: 0.02
+  use_data_labels: false        # pure physics solver check (no price labels)
+  evaluation:
+    s_grid: 41
+    tau_grid: 9
+    k_grid: 7
+    residual_points: 2048       # independent collocation set for final residuals
+  acceptance:
+    price_rmse_max: 0.25        # price units on a 60-160 spot domain
+    price_max_error_max: 2.0
+    pde_residual_rms_max: 0.05  # non-dimensionalised residual
+  seeds: [0, 1, 2, 3, 4]

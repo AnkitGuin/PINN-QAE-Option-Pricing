@@ -1,0 +1,17 @@
+includes: ["base.yaml", "real_data.yaml", "calibration.yaml", "pinn.yaml"]
+
+experiment:
+  name: exp3_real_market
+  id: experiment_3
+  description: >-
+    Conditional real-market walk-forward evaluation. Executes only if a
+    suitable historical European-option dataset is available; otherwise records
+    a skipped status with the reason (never substitutes unsuitable data).
+  output_dir: results/experiment_3
+
+exp3:
+  methods: [least_squares, frozen, fixed_parameter_pinn, data_only_nn]
+  eligibility_report_only: true
+  note: >-
+    Real-data conclusions are conditional on data access. Market volatility is
+    not ground truth; RMSE is measured against observed mid premiums.

@@ -1,0 +1,31 @@
+# Scenario B — gradual deterministic volatility change (linear ramp).
+synthetic:
+  scenario: gradual_change
+  n_dates: 120
+  start_date: "2025-01-01"
+  underlying: SYNTH
+  currency: USD
+  option_type: call
+  spot:
+    s0: 100.0
+    drift_annual: 0.03
+    realized_vol_annual: 0.10
+  rate_schedule:
+    kind: constant
+    value: 0.05
+  vol_schedule:
+    kind: linear_ramp
+    from: 0.18
+    to: 0.32
+  maturities: [0.10, 0.25, 0.50, 0.75, 1.00]
+  moneyness:
+    min: 0.85
+    max: 1.15
+    n: 9
+  noise:
+    mode: none
+    relative_std: 0.0
+  spreads:
+    relative: 0.01
+    absolute: 0.05
+  observation_dropout: 0.0

@@ -1,0 +1,75 @@
+# PINN architecture, normalization, collocation and training.
+#
+# FROZEN SETTINGS: all values below were selected on the constant-volatility
+# development scenario only (validation Gates 4 and 5: forward-solver accuracy
+# and constant-volatility recovery), and frozen BEFORE any changing-volatility,
+# noise or sparse test condition was evaluated.
+#
+# Formulation: homogeneous coordinates u(log(S/K), tau, r) with V = S*u
+# (exact degree-1 homogeneity of the Black-Scholes call price); see
+# src/pinn/network.py and docs/methodology.md.
+pinn:
+  architecture:
+    input_features: [log_moneyness, tau, rate]
+    hidden_units: [32, 32, 32]
+    activation: tanh
+
+  sigma_parameterization:
+    # sigma_hat = softplus(a_w) + epsilon_sigma, shared across the window.
+    epsilon_sigma: 1.0e-6
+    init_sigma: 0.20            # initial value (warm start overrides this)
+    warm_start: true            # initialise a_w from the previous window's estimate
+
+  normalization:
+    # Inputs z-scored with calibration-window statistics only (no test info).
+    # Output u is dimensionless; physical price V = S * u.
+    price_scale: null
+    notes: "homogeneous coordinates; V = S * u(log(S/K), tau, r)"
+
+  training:
+    torch_threads: 1
+    validation_fraction: 0.15   # held-out fraction of window quotes (early stopping)
+    early_stopping:
+      enabled: true
+      patience: 300
+      min_delta: 1.0e-9
+    stage_a:                    # network only, sigma frozen
+      epochs: 900
+      lr: 0.005
+      lr_decay: 0.9995
+    refinement:                 # L-BFGS polish of stage A
+      iterations: 350
+      lr: 0.5
+      tolerance: 1.0e-16
+    stage_b:                    # joint refinement, sigma released
+      epochs: 400
+      lr_net: 0.001
+      lr_sigma: 0.003
+      lbfgs_iterations: 350
+      lbfgs_lr: 0.3
+    collocation:
+      n_interior: 512
+      n_boundary: 256
+      n_terminal: 256
+      tau_min: 0.05             # interior collocation excludes tau < tau_min
+      s_low_factor: 0.30        # S_lo = factor * min(window spots)
+      s_high_factor: 2.40       # S_hi = factor * max(window spots); deep enough
+                                 # that the parity-floor boundary error is
+                                 # negligible (estimate recorded per window)
+      terminal_smoothing_alpha: 0.0
+
+  loss_weights:
+    lambda_data: 1.0
+    lambda_pde: 100.0
+    lambda_boundary: 1.0
+    lambda_terminal: 5.0
+
+  # Residuals are already dimensionless in homogeneous coordinates; the
+  # s_tau scaling used for magnitude balance is documented in losses.py.
+  pde_residual_scaling: homogeneous_dimensionless
+
+  # Data-only ablation (H3): identical architecture/epochs, physics losses off.
+  data_only:
+    use_pde: false
+    use_boundary: false
+    use_terminal: false

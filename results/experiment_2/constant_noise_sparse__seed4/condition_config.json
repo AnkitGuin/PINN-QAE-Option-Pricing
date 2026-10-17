@@ -1,0 +1,4 @@
+{
+  "name": "constant_noise_sparse",
+  "scenario": "synthetic/noise_sparse.yaml"
+}

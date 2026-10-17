@@ -1,0 +1,24 @@
+{
+  "config_hash": "72b8cad21ffd04907a88e6db79e354d5e16569a52f05dbf485e9fde901750a95",
+  "dataset_version": null,
+  "device": "cpu",
+  "environment": {
+    "cpu_count": 2,
+    "machine": "x86_64",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "platform": "Linux-6.1.158+-x86_64-with-glibc2.41",
+    "processor": "",
+    "python": "3.13.16",
+    "qiskit": "2.6.0",
+    "qiskit_aer": null,
+    "scipy": "1.17.1",
+    "seed": 0,
+    "timestamp_utc": "2026-10-17T08:26:55.421536+00:00",
+    "torch": "2.14.1+cpu",
+    "torch_cuda_available": false
+  },
+  "experiment": "exp1_forward_pinn",
+  "seed": 0,
+  "status": "gate4_pass"
+}

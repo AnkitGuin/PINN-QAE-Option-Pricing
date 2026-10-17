@@ -1,0 +1,32 @@
+# Scenarios D + E — observation noise and sparse quotes (H3 stress condition).
+# The exp2 experiment derives noise-only and sparse-only conditions from
+# synthetic/constant.yaml via overrides; this file enables both at once.
+synthetic:
+  scenario: noise_sparse
+  n_dates: 120
+  start_date: "2025-01-01"
+  underlying: SYNTH
+  currency: USD
+  option_type: call
+  spot:
+    s0: 100.0
+    drift_annual: 0.03
+    realized_vol_annual: 0.10
+  rate_schedule:
+    kind: constant
+    value: 0.05
+  vol_schedule:
+    kind: constant
+    value: 0.20
+  maturities: [0.25, 0.50, 1.00]        # sparser maturity coverage
+  moneyness:
+    min: 0.90
+    max: 1.10
+    n: 5                                # sparser strike coverage
+  noise:
+    mode: relative_gaussian
+    relative_std: 0.02                  # 2% relative price noise
+  spreads:
+    relative: 0.02
+    absolute: 0.05
+  observation_dropout: 0.0

@@ -1,0 +1,148 @@
+{
+  "exp1": {
+    "acceptance": {
+      "pde_residual_rms_max": 0.05,
+      "price_max_error_max": 2.0,
+      "price_rmse_max": 0.25
+    },
+    "domain": {
+      "k_max": 115.0,
+      "k_min": 85.0,
+      "rate": 0.05,
+      "s_max": 160.0,
+      "s_min": 60.0,
+      "tau_max": 1.0,
+      "tau_min": 0.02
+    },
+    "evaluation": {
+      "k_grid": 7,
+      "residual_points": 2048,
+      "s_grid": 41,
+      "tau_grid": 9
+    },
+    "known_parameters": {
+      "rate": 0.05,
+      "sigma": 0.2
+    },
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "training": {
+      "collocation": {
+        "n_boundary": 256,
+        "n_interior": 1024,
+        "n_terminal": 256,
+        "tau_min": 0.02
+      },
+      "early_stopping": {
+        "enabled": true,
+        "min_delta": 1e-10,
+        "patience": 600
+      },
+      "epochs": 4000
+    },
+    "use_data_labels": false
+  },
+  "experiment": {
+    "description": "Gate 4: forward PINN with externally known parameters must reproduce the analytical Black-Scholes surface within pre-declared tolerances.",
+    "id": "experiment_1",
+    "name": "exp1_forward_pinn",
+    "output_dir": "results/experiment_1"
+  },
+  "logging": {
+    "level": "INFO"
+  },
+  "metrics": {
+    "price_floor_epsilon": 0.05
+  },
+  "paths": {
+    "data_dir": "data",
+    "figures_dir": "figures",
+    "logs_dir": "logs",
+    "results_dir": "results"
+  },
+  "pinn": {
+    "architecture": {
+      "activation": "tanh",
+      "hidden_units": [
+        32,
+        32,
+        32
+      ],
+      "input_features": [
+        "log_moneyness",
+        "tau",
+        "rate"
+      ]
+    },
+    "data_only": {
+      "use_boundary": false,
+      "use_pde": false,
+      "use_terminal": false
+    },
+    "loss_weights": {
+      "lambda_boundary": 1.0,
+      "lambda_data": 1.0,
+      "lambda_pde": 100.0,
+      "lambda_terminal": 5.0
+    },
+    "normalization": {
+      "notes": "homogeneous coordinates; V = S * u(log(S/K), tau, r)",
+      "price_scale": null
+    },
+    "pde_residual_scaling": "homogeneous_dimensionless",
+    "sigma_parameterization": {
+      "epsilon_sigma": 1e-06,
+      "init_sigma": 0.2,
+      "warm_start": true
+    },
+    "training": {
+      "collocation": {
+        "n_boundary": 256,
+        "n_interior": 512,
+        "n_terminal": 256,
+        "s_high_factor": 2.4,
+        "s_low_factor": 0.3,
+        "tau_min": 0.05,
+        "terminal_smoothing_alpha": 0.0
+      },
+      "early_stopping": {
+        "enabled": true,
+        "min_delta": 1e-09,
+        "patience": 300
+      },
+      "refinement": {
+        "iterations": 350,
+        "lr": 0.5,
+        "tolerance": 1e-16
+      },
+      "stage_a": {
+        "epochs": 900,
+        "lr": 0.005,
+        "lr_decay": 0.9995
+      },
+      "stage_b": {
+        "epochs": 400,
+        "lbfgs_iterations": 350,
+        "lbfgs_lr": 0.3,
+        "lr_net": 0.001,
+        "lr_sigma": 0.003
+      },
+      "torch_threads": 1,
+      "validation_fraction": 0.15
+    }
+  },
+  "project": {
+    "device": "cpu",
+    "master_seed": 42,
+    "name": "pinn-qae-option-pricing",
+    "title": "Physics-Informed Neural Networks for Adaptive Quantum Option Pricing under Time-Varying Market Conditions"
+  },
+  "reproducibility": {
+    "record_environment": true
+  }
+}

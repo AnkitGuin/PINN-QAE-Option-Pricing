@@ -1,0 +1,4 @@
+{
+  "name": "abrupt_change",
+  "scenario": "synthetic/abrupt_change.yaml"
+}

@@ -1,0 +1,8 @@
+{
+  "experiment": "experiment_3",
+  "status": "not_executed",
+  "reason": "No suitable historical European option-chain dataset is accessible in the execution environment (no API credentials, no licensed vendor files). Per the research specification, unsuitable data must not be substituted.",
+  "enabled": false,
+  "substituted_data": false,
+  "note": "No suitable historical European-option dataset is accessible. Per the research specification, unsuitable data must not be substituted; the synthetic pipeline (exp0/1/2/4) is fully functional without it."
+}

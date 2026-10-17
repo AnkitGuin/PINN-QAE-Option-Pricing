@@ -1,0 +1,24 @@
+{
+  "boundary_error": 0.00022721355235771787,
+  "independent_diagnostics": {
+    "boundary_error": 0.00022721355235771787,
+    "boundary_upper_error_estimate": 1.7187904478111713e-87,
+    "collocation_x_range": [
+      -1.8544225829711778,
+      1.507738581670227
+    ],
+    "n_interior": 1024,
+    "pde_residual_max": 0.003985592661902397,
+    "pde_residual_rms": 0.000350029216759307,
+    "terminal_error": 0.002691106266903915
+  },
+  "pde_residual_rms_independent": 0.000350029216759307,
+  "price_mae": 0.06696940853325282,
+  "price_max_error": 1.1327749642333758,
+  "price_rmse": 0.11618502755180285,
+  "runtime_seconds": 10.694977084999664,
+  "seed": 1,
+  "sigma": 0.2,
+  "status": "converged_stage_a",
+  "terminal_error": 0.002691106266903915
+}

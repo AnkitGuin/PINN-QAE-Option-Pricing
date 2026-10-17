@@ -1,0 +1,37 @@
+includes: ["base.yaml", "quantum.yaml", "calibration.yaml"]
+
+experiment:
+  name: exp4_quantum
+  id: experiment_4
+  description: >-
+    Simulator-based QAE pricing: known synthetic parameters first, then LS- and
+    PINN-calibrated parameters, with full error decomposition (calibration /
+    discretization / QAE estimation) and resource accounting.
+  output_dir: results/experiment_4
+
+exp4:
+  # Contract subset selection rule, fixed BEFORE examining comparative
+  # outcomes: from the exp2 constant_clean condition, first calibration seed
+  # (seed 0), use the FIRST evaluation block; select contracts whose strike is
+  # nearest ATM per maturity; take the three listed maturities.
+  selection:
+    source_condition: constant_clean
+    source_seed: 0
+    block: first
+    rule: nearest_atm_per_maturity
+    maturities: [0.25, 0.50, 1.00]
+
+  inputs:
+    - known_sigma        # true generating volatility (validation input)
+    - least_squares      # sigma_LS from the same block's calibration window
+    - pinn               # sigma_PINN from the same block's calibration window
+    - frozen             # sigma_frozen from the initial window
+
+  # Resource / resolution sweeps (known-sigma input only).
+  sweeps:
+    evaluation_qubits: [2, 3, 4, 5]
+    distribution_qubits: [2, 3, 4, 5]
+
+  monte_carlo:
+    path_counts: [1000, 10000, 100000, 1000000]
+    n_repeats: 20

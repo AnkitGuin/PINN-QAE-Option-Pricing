@@ -1,0 +1,34 @@
+# Real-market data configuration.
+# Experiment 3 is CONDITIONAL: it executes only when a suitable historical
+# European-option dataset is actually available. In this environment no
+# eligible provider is accessible (see docs/limitations.md), so the experiment
+# records an honest skipped status rather than substituting unsuitable data.
+real_data:
+  enabled: false
+  source_path: null             # set to a CSV/Parquet path implementing the schema in docs/data_dictionary.md
+  source_format: auto
+  provider: null                # alphavantage | cboe | optionmetrics | other
+  reason_unavailable: >-
+    No suitable historical European option-chain dataset is accessible in the
+    execution environment (no API credentials, no licensed vendor files).
+    Per the research specification, unsuitable data must not be substituted.
+
+  eligibility:
+    exercise_style: [european]
+    require_bid_ask: true
+    require_timestamps: true
+    dividend_check: no_material_dividends
+    min_maturity_days: 7
+    max_maturity_days: 730
+
+  preprocessing:
+    # Filters from the dataset design document (kept configurable).
+    min_mid_price: 0.05
+    max_relative_spread: 0.25
+    min_open_interest: 10
+    min_volume: 1
+    dte_range: [7, 180]
+    max_abs_log_moneyness: 0.10
+    iv_range: [0.02, 2.0]
+    no_arbitrage_tolerance: 0.02
+    drop_duplicates: true

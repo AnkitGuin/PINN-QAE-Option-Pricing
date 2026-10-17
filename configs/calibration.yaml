@@ -1,0 +1,27 @@
+# Classical calibration and walk-forward protocol.
+# These settings are shared by least-squares, PINN and all ablations so that
+# every calibrator sees identical windows, observations and rate inputs.
+calibration:
+  # Volatility search constraints (identical for LS and PINN parameterisation).
+  sigma_bounds: [0.01, 3.0]
+
+  ls:
+    method: bounded_scalar     # scipy minimize_scalar with bounds (Brent-style)
+    x_tolerance: 1.0e-10
+    max_evaluations: 200
+    warm_start: true           # initialise from previous window estimate (past info only)
+
+  rolling:
+    window_dates: 20           # calibration uses the 20 most recent dates
+    step_dates: 5              # recalibrate every 5 dates
+    horizon_dates: 5           # out-of-sample evaluation block = next 5 dates
+    min_window_observations: 30
+
+  frozen:
+    description: "least-squares fit on the FIRST calibration window only, never updated"
+
+  # Effective-volatility reference definitions for parameter-error metrics on
+  # time-varying scenarios (both are reported; they coincide for constant vol).
+  references:
+    - sigma_instantaneous       # schedule value at the calibration date
+    - sigma_effective_block     # sqrt(mean integrated variance A/tau over eval-block contracts)

@@ -1,0 +1,20 @@
+{
+  "dates": [
+    "2025-01-01",
+    "2025-06-17"
+  ],
+  "dropout_realized": 0.0,
+  "master_seed": 42,
+  "n_dates": 120,
+  "n_expiries_per_date": 3,
+  "n_observations": 1800,
+  "n_strikes_per_expiry": 5,
+  "noise_mode": "none",
+  "noise_relative_std": 0.0,
+  "observation_dropout": 0.0,
+  "quality_flag_counts": {
+    "0": 1800
+  },
+  "scenario": "constant",
+  "seed": 0
+}

@@ -1,0 +1,50 @@
+includes: ["base.yaml", "calibration.yaml", "pinn.yaml"]
+
+experiment:
+  name: exp2_inverse_pinn
+  id: experiment_2
+  description: >-
+    Core experiment: rolling inverse-PINN volatility calibration vs rolling
+    constrained least squares vs frozen calibration vs data-only NN under
+    identical walk-forward windows, on synthetic scenarios with known ground
+    truth.
+  output_dir: results/experiment_2
+
+exp2:
+  # Conditions. Each references a scenario config; "overrides" are deep-merged
+  # on top of that scenario's synthetic block (used to derive noise-only and
+  # sparse-only variants of the constant scenario).
+  conditions:
+    - name: constant_clean
+      scenario: synthetic/constant.yaml
+    - name: constant_noise
+      scenario: synthetic/constant.yaml
+      overrides:
+        synthetic:
+          noise: {mode: relative_gaussian, relative_std: 0.02}
+    - name: constant_sparse
+      scenario: synthetic/constant.yaml
+      overrides:
+        synthetic:
+          moneyness: {min: 0.90, max: 1.10, n: 5}
+          maturities: [0.25, 0.50, 1.00]
+    - name: constant_noise_sparse
+      scenario: synthetic/noise_sparse.yaml
+    - name: gradual_change
+      scenario: synthetic/gradual_change.yaml
+    - name: abrupt_change
+      scenario: synthetic/abrupt_change.yaml
+
+  methods: [least_squares, pinn, frozen, data_only_nn]
+
+  # At least five seeds per condition (spec section on statistical comparison).
+  seeds: [0, 1, 2, 3, 4]
+
+  # Reference for pricing errors is the true (exact) model price under the
+  # generating time-varying parameters.
+  reference_price: true_price
+
+  gates:
+    # Gate 5 pre-declared acceptance: inverse PINN recovers constant synthetic
+    # volatility on the clean constant condition.
+    constant_recovery_abs_tol: 0.02   # |sigma_hat - sigma_true| per window, median across windows/seeds

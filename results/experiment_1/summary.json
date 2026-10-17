@@ -1,0 +1,78 @@
+{
+  "acceptance": {
+    "pde_residual_rms_max": 0.05,
+    "price_max_error_max": 2.0,
+    "price_rmse_max": 0.25
+  },
+  "gate": 4,
+  "max_price_rmse": 0.1991555307974307,
+  "mean_independent_pde_residual_rms": 0.00039076669444828357,
+  "mean_max_error": 1.1513588474320573,
+  "mean_price_rmse": 0.14305823927378425,
+  "n_seeds": 5,
+  "name": "forward_pinn_reproduces_black_scholes",
+  "runs": [
+    {
+      "boundary_error": 0.0004903672445982437,
+      "pde_residual_rms_independent": 0.0004026332374381194,
+      "price_mae": 0.14084089968475746,
+      "price_max_error": 1.1013636291413942,
+      "price_rmse": 0.1991555307974307,
+      "runtime_seconds": 13.014254306000112,
+      "seed": 0,
+      "sigma": 0.2,
+      "status": "converged_stage_a",
+      "terminal_error": 0.0021805518078813883
+    },
+    {
+      "boundary_error": 0.00022721355235771787,
+      "pde_residual_rms_independent": 0.000350029216759307,
+      "price_mae": 0.06696940853325282,
+      "price_max_error": 1.1327749642333758,
+      "price_rmse": 0.11618502755180285,
+      "runtime_seconds": 10.694977084999664,
+      "seed": 1,
+      "sigma": 0.2,
+      "status": "converged_stage_a",
+      "terminal_error": 0.002691106266903915
+    },
+    {
+      "boundary_error": 0.00025879544227646483,
+      "pde_residual_rms_independent": 0.00040858327392077697,
+      "price_mae": 0.0790381640459306,
+      "price_max_error": 0.8791081194092687,
+      "price_rmse": 0.11851122181540595,
+      "runtime_seconds": 10.970168511999873,
+      "seed": 2,
+      "sigma": 0.2,
+      "status": "converged_stage_a",
+      "terminal_error": 0.0018650084695049705
+    },
+    {
+      "boundary_error": 0.00031417016309458066,
+      "pde_residual_rms_independent": 0.00041153293188594535,
+      "price_mae": 0.09147493585352452,
+      "price_max_error": 1.5091728671281777,
+      "price_rmse": 0.16032032149184874,
+      "runtime_seconds": 11.450544446000094,
+      "seed": 3,
+      "sigma": 0.2,
+      "status": "converged_stage_a",
+      "terminal_error": 0.0027440783529924418
+    },
+    {
+      "boundary_error": 0.000879862509156792,
+      "pde_residual_rms_independent": 0.00038105481223726917,
+      "price_mae": 0.08098779390724348,
+      "price_max_error": 1.1343746572480695,
+      "price_rmse": 0.12111909471243298,
+      "runtime_seconds": 9.883318410000356,
+      "seed": 4,
+      "sigma": 0.2,
+      "status": "converged_stage_a",
+      "terminal_error": 0.0022752567965624486
+    }
+  ],
+  "status": "pass",
+  "use_data_labels": false
+}

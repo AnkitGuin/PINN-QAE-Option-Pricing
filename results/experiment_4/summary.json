@@ -1,0 +1,194 @@
+{
+  "selection": {
+    "source_condition": "constant_clean",
+    "source_seed": 0,
+    "block": "first",
+    "rule": "nearest_atm_per_maturity",
+    "maturities": [
+      0.25,
+      0.5,
+      1.0
+    ]
+  },
+  "contracts": [
+    {
+      "tau": 0.2491444216290212,
+      "strike": 103.10039023316374,
+      "spot": 103.10039023316374
+    },
+    {
+      "tau": 0.5010266940451746,
+      "strike": 103.10039023316374,
+      "spot": 103.10039023316374
+    },
+    {
+      "tau": 0.999315537303217,
+      "strike": 103.10039023316374,
+      "spot": 103.10039023316374
+    }
+  ],
+  "sigma_inputs": {
+    "known_sigma": 0.2,
+    "least_squares": 0.2000000003365094,
+    "pinn": 0.1988196218061178,
+    "frozen": 0.2000000003365094
+  },
+  "pooled_by_input": {
+    "known_sigma": {
+      "rmse_total": 0.012887865684182303,
+      "rmse_calibration": 0.0,
+      "rmse_discretization": 0.04383591868094808,
+      "rmse_qae": 0.05202706875432872
+    },
+    "least_squares": {
+      "rmse_total": 0.012887861123835732,
+      "rmse_calibration": 1.0098659014250676e-08,
+      "rmse_discretization": 0.04383591866997182,
+      "rmse_qae": 0.052027067198514965
+    },
+    "pinn": {
+      "rmse_total": 0.05246922634193531,
+      "rmse_calibration": 0.03541909237956168,
+      "rmse_discretization": 0.04396751699696544,
+      "rmse_qae": 0.041045205329921786
+    },
+    "frozen": {
+      "rmse_total": 0.012887861123835732,
+      "rmse_calibration": 1.0098659014250676e-08,
+      "rmse_discretization": 0.04383591866997182,
+      "rmse_qae": 0.052027067198514965
+    }
+  },
+  "sweep_m": [
+    {
+      "m": 2,
+      "v_qae": 7.162301676557377,
+      "total_error": 0.051407784240531385,
+      "qae_estimation_error": -0.02047942706475414,
+      "a_hat": 0.12447738667757147,
+      "a_exact": 0.12483330935114695,
+      "shots": 4096,
+      "grover_queries": 12288,
+      "a_applications": 4096,
+      "qae_runtime_seconds": 0.23108555899852945
+    },
+    {
+      "m": 3,
+      "v_qae": 7.093816826102894,
+      "total_error": -0.01707706621395122,
+      "qae_estimation_error": -0.08896427751923675,
+      "a_hat": 0.1232871526443583,
+      "a_exact": 0.12483330935114695,
+      "shots": 4096,
+      "grover_queries": 28672,
+      "a_applications": 4096,
+      "qae_runtime_seconds": 0.42847681700004614
+    },
+    {
+      "m": 4,
+      "v_qae": 7.16827022221458,
+      "total_error": 0.05737632989773456,
+      "qae_estimation_error": -0.014510881407550968,
+      "a_hat": 0.12458111715406146,
+      "a_exact": 0.12483330935114695,
+      "shots": 4096,
+      "grover_queries": 61440,
+      "a_applications": 4096,
+      "qae_runtime_seconds": 0.9073341660005099
+    },
+    {
+      "m": 5,
+      "v_qae": 7.207117709041526,
+      "total_error": 0.09622381672468094,
+      "qae_estimation_error": 0.02433660541939542,
+      "a_hat": 0.12525626794462882,
+      "a_exact": 0.12483330935114695,
+      "shots": 4096,
+      "grover_queries": 126976,
+      "a_applications": 4096,
+      "qae_runtime_seconds": 1.6758111029994325
+    }
+  ],
+  "sweep_n": [
+    {
+      "n": 2,
+      "grid_points": 4,
+      "v_exact_discrete": 7.1409534111735065,
+      "discretization_error": 0.03005951885666125,
+      "v_qae": 7.1772270379315675,
+      "total_error": 0.06633314561472226,
+      "tail_mass": 0.0
+    },
+    {
+      "n": 3,
+      "grid_points": 8,
+      "v_exact_discrete": 7.472026902707065,
+      "discretization_error": 0.36113301039021994,
+      "v_qae": 7.530263121309037,
+      "total_error": 0.419369228992192,
+      "tail_mass": 0.0
+    },
+    {
+      "n": 4,
+      "grid_points": 16,
+      "v_exact_discrete": 7.182781103622131,
+      "discretization_error": 0.07188721130528553,
+      "v_qae": 7.093816826102894,
+      "total_error": -0.01707706621395122,
+      "tail_mass": 0.0
+    },
+    {
+      "n": 5,
+      "grid_points": 32,
+      "v_exact_discrete": 7.122285644244305,
+      "discretization_error": 0.011391751927459559,
+      "v_qae": 7.1503709834635725,
+      "total_error": 0.03947709114672726,
+      "tail_mass": 0.0
+    }
+  ],
+  "mc_convergence": [
+    {
+      "n_paths": 1000,
+      "rmse": 0.24597104203793377,
+      "mean_error": -0.03084559290058784,
+      "std_error": 0.25036878677124147,
+      "n_repeats": 20
+    },
+    {
+      "n_paths": 10000,
+      "rmse": 0.06428733510571136,
+      "mean_error": 0.006763093015495469,
+      "std_error": 0.06559141493773792,
+      "n_repeats": 20
+    },
+    {
+      "n_paths": 100000,
+      "rmse": 0.016629830424742375,
+      "mean_error": -0.0002606757426406592,
+      "std_error": 0.017059749739414667,
+      "n_repeats": 20
+    },
+    {
+      "n_paths": 1000000,
+      "rmse": 0.006924201465626644,
+      "mean_error": 0.0018564353812140055,
+      "std_error": 0.006843991880087078,
+      "n_repeats": 20
+    }
+  ],
+  "quantum_settings": {
+    "n_qubits": 4,
+    "truncation_quantile": 0.001,
+    "m": 3,
+    "mode": "shots",
+    "shots": 4096,
+    "post_processing": "mle"
+  },
+  "notes": [
+    "All sigma inputs use identical quantum settings; differences in QAE output are attributable to inputs.",
+    "A embeds distribution loading and payoff encoding exactly (StatePreparation); its transpiled cost is reported in resources.json.",
+    "Classical MC uses antithetic sampling of the same lognormal law; comparison is by error vs sample/query budget, not runtime speedup.",
+    "No quantum advantage is claimed; simulator resource counts are accounting facts."
+  ]
+}

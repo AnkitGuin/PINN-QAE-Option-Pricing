@@ -1,0 +1,37 @@
+[
+  {
+    "figure": "/home/user/pinn-qae-option-pricing/figures/fig1_exp0_mc_convergence.png",
+    "description": "Monte Carlo pricing error vs path count with 1/sqrt(N) reference",
+    "data_source": "results/experiment_0/gate1_report.json"
+  },
+  {
+    "figure": "/home/user/pinn-qae-option-pricing/figures/fig2_exp1_forward_pinn.png",
+    "description": "Forward PINN price RMSE and independent PDE residual per seed with acceptance tolerances",
+    "data_source": "results/experiment_1/summary.json"
+  },
+  {
+    "figure": "/home/user/pinn-qae-option-pricing/figures/fig3_exp2_rmse_by_condition.png",
+    "description": "Pooled out-of-sample RMSE per condition/method (error bars: seed std of mean block RMSE)",
+    "data_source": "results/experiment_2/all_block_tables.csv"
+  },
+  {
+    "figure": "/home/user/pinn-qae-option-pricing/figures/fig4_exp2_sigma_paths.png",
+    "description": "Rolling sigma estimates against instantaneous and block-effective truth (seed 0)",
+    "data_source": "results/experiment_2/all_sigma_histories.csv"
+  },
+  {
+    "figure": "/home/user/pinn-qae-option-pricing/figures/fig5_exp2_paired_diffs.png",
+    "description": "Per-block RMSE difference PINN minus LS (positive: PINN worse)",
+    "data_source": "results/experiment_2/all_block_tables.csv"
+  },
+  {
+    "figure": "/home/user/pinn-qae-option-pricing/figures/fig6_exp4_error_decomposition.png",
+    "description": "Absolute error components (calibration/discretization/QAE) per sigma input and maturity",
+    "data_source": "results/experiment_4/qae_main.csv"
+  },
+  {
+    "figure": "/home/user/pinn-qae-option-pricing/figures/fig7_exp4_convergence.png",
+    "description": "Error vs computational budget for classical MC and canonical QAE",
+    "data_source": "results/experiment_4/{mc_convergence,sweep_m}.csv"
+  }
+]

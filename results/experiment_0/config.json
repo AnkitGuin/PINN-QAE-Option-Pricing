@@ -1,0 +1,102 @@
+{
+  "exp0": {
+    "mc": {
+      "ci_level": 0.95,
+      "convergence_atol": 0.15,
+      "max_miss_fraction_at_max_paths": 0.2,
+      "n_repeats": 20,
+      "path_counts": [
+        1000,
+        10000,
+        100000,
+        1000000
+      ]
+    },
+    "reference_contracts": [
+      {
+        "rate": 0.05,
+        "sigma": 0.2,
+        "spot": 100.0,
+        "strike": 100.0,
+        "tau": 0.5
+      },
+      {
+        "rate": 0.1,
+        "sigma": 0.2,
+        "spot": 42.0,
+        "strike": 40.0,
+        "tau": 0.5
+      },
+      {
+        "rate": 0.02,
+        "sigma": 0.35,
+        "spot": 100.0,
+        "strike": 90.0,
+        "tau": 1.0
+      },
+      {
+        "rate": 0.03,
+        "sigma": 0.12,
+        "spot": 55.0,
+        "strike": 66.0,
+        "tau": 2.0
+      },
+      {
+        "rate": 0.05,
+        "sigma": 0.5,
+        "spot": 100.0,
+        "strike": 120.0,
+        "tau": 0.25
+      }
+    ],
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "tolerances": {
+      "bounds_tol": 1e-12,
+      "forward_form_abs": 1e-10,
+      "mc_contracts": [
+        {
+          "rate": 0.05,
+          "sigma": 0.25,
+          "spot": 100.0,
+          "strike": 105.0,
+          "tau": 0.5
+        }
+      ],
+      "near_zero_maturity_tau": 1e-08,
+      "parity_abs": 1e-10
+    }
+  },
+  "experiment": {
+    "description": "Gate 1: analytical Black-Scholes validation against independent known values, put-call parity, price bounds, limiting cases, and Monte Carlo convergence / confidence-interval coverage.",
+    "id": "experiment_0",
+    "name": "exp0_validation",
+    "output_dir": "results/experiment_0"
+  },
+  "logging": {
+    "level": "INFO"
+  },
+  "metrics": {
+    "price_floor_epsilon": 0.05
+  },
+  "paths": {
+    "data_dir": "data",
+    "figures_dir": "figures",
+    "logs_dir": "logs",
+    "results_dir": "results"
+  },
+  "project": {
+    "device": "cpu",
+    "master_seed": 42,
+    "name": "pinn-qae-option-pricing",
+    "title": "Physics-Informed Neural Networks for Adaptive Quantum Option Pricing under Time-Varying Market Conditions"
+  },
+  "reproducibility": {
+    "record_environment": true
+  }
+}

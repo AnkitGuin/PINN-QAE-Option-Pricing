@@ -1,0 +1,22 @@
+# Base configuration: project-level settings shared by every experiment.
+project:
+  name: pinn-qae-option-pricing
+  title: "Physics-Informed Neural Networks for Adaptive Quantum Option Pricing under Time-Varying Market Conditions"
+  master_seed: 42
+  device: cpu
+
+paths:
+  data_dir: data
+  results_dir: results
+  figures_dir: figures
+  logs_dir: logs
+
+logging:
+  level: INFO
+
+# Price floor used in guarded relative errors; matches a nickel quote precision.
+metrics:
+  price_floor_epsilon: 0.05
+
+reproducibility:
+  record_environment: true

@@ -1,0 +1,12 @@
+{
+  "name": "constant_noise",
+  "overrides": {
+    "synthetic": {
+      "noise": {
+        "mode": "relative_gaussian",
+        "relative_std": 0.02
+      }
+    }
+  },
+  "scenario": "synthetic/constant.yaml"
+}

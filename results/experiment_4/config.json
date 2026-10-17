@@ -1,0 +1,126 @@
+{
+  "project": {
+    "name": "pinn-qae-option-pricing",
+    "title": "Physics-Informed Neural Networks for Adaptive Quantum Option Pricing under Time-Varying Market Conditions",
+    "master_seed": 42,
+    "device": "cpu"
+  },
+  "paths": {
+    "data_dir": "data",
+    "results_dir": "results",
+    "figures_dir": "figures",
+    "logs_dir": "logs"
+  },
+  "logging": {
+    "level": "INFO"
+  },
+  "metrics": {
+    "price_floor_epsilon": 0.05
+  },
+  "reproducibility": {
+    "record_environment": true
+  },
+  "quantum": {
+    "distribution": {
+      "n_qubits": 4,
+      "truncation_quantile": 0.001
+    },
+    "payoff": {
+      "scale": "s_max_minus_k"
+    },
+    "qae": {
+      "variant": "canonical",
+      "evaluation_qubits": 3,
+      "mode": "shots",
+      "shots": 4096,
+      "simulator_seed": 7,
+      "post_processing": "mle",
+      "theta_grid_points": 20001
+    },
+    "resources": {
+      "transpile_optimization_level": 1
+    },
+    "monte_carlo": {
+      "path_counts": [
+        1000,
+        10000,
+        100000,
+        1000000
+      ],
+      "n_repeats": 20
+    }
+  },
+  "calibration": {
+    "sigma_bounds": [
+      0.01,
+      3.0
+    ],
+    "ls": {
+      "method": "bounded_scalar",
+      "x_tolerance": 1e-10,
+      "max_evaluations": 200,
+      "warm_start": true
+    },
+    "rolling": {
+      "window_dates": 20,
+      "step_dates": 5,
+      "horizon_dates": 5,
+      "min_window_observations": 30
+    },
+    "frozen": {
+      "description": "least-squares fit on the FIRST calibration window only, never updated"
+    },
+    "references": [
+      "sigma_instantaneous",
+      "sigma_effective_block"
+    ]
+  },
+  "experiment": {
+    "name": "exp4_quantum",
+    "id": "experiment_4",
+    "description": "Simulator-based QAE pricing: known synthetic parameters first, then LS- and PINN-calibrated parameters, with full error decomposition (calibration / discretization / QAE estimation) and resource accounting.",
+    "output_dir": "results/experiment_4"
+  },
+  "exp4": {
+    "selection": {
+      "source_condition": "constant_clean",
+      "source_seed": 0,
+      "block": "first",
+      "rule": "nearest_atm_per_maturity",
+      "maturities": [
+        0.25,
+        0.5,
+        1.0
+      ]
+    },
+    "inputs": [
+      "known_sigma",
+      "least_squares",
+      "pinn",
+      "frozen"
+    ],
+    "sweeps": {
+      "evaluation_qubits": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "distribution_qubits": [
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "monte_carlo": {
+      "path_counts": [
+        1000,
+        10000,
+        100000,
+        1000000
+      ],
+      "n_repeats": 20
+    }
+  }
+}

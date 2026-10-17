@@ -1,0 +1,16 @@
+{
+  "domain": {
+    "k_max": 115.0,
+    "k_min": 85.0,
+    "rate": 0.05,
+    "s_max": 160.0,
+    "s_min": 60.0,
+    "sigma": 0.2,
+    "tau_max": 1.0,
+    "tau_min": 0.02
+  },
+  "known_parameters": {
+    "rate": 0.05,
+    "sigma": 0.2
+  }
+}

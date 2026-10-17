@@ -1,0 +1,37 @@
+includes: ["base.yaml"]
+
+experiment:
+  name: exp0_validation
+  id: experiment_0
+  description: >-
+    Gate 1: analytical Black-Scholes validation against independent known
+    values, put-call parity, price bounds, limiting cases, and Monte Carlo
+    convergence / confidence-interval coverage.
+  output_dir: results/experiment_0
+
+exp0:
+  # Independent reference values (computed with an independent Black-76
+  # forward-form implementation and cross-checked against published examples;
+  # see tests/test_black_scholes.py).
+  reference_contracts:
+    - {spot: 100.0, strike: 100.0, tau: 0.5, rate: 0.05, sigma: 0.20}
+    - {spot: 42.0,  strike: 40.0,  tau: 0.5, rate: 0.10, sigma: 0.20}   # Hull (2022) example
+    - {spot: 100.0, strike: 90.0,  tau: 1.0, rate: 0.02, sigma: 0.35}
+    - {spot: 55.0,  strike: 66.0,  tau: 2.0, rate: 0.03, sigma: 0.12}
+    - {spot: 100.0, strike: 120.0, tau: 0.25, rate: 0.05, sigma: 0.50}
+  tolerances:
+    forward_form_abs: 1.0e-10    # call price vs independent forward-form implementation
+    parity_abs: 1.0e-10
+    bounds_tol: 1.0e-12
+    near_zero_maturity_tau: 1.0e-8
+    mc_contracts:
+      - {spot: 100.0, strike: 105.0, tau: 0.5, rate: 0.05, sigma: 0.25}
+  mc:
+    path_counts: [1000, 10000, 100000, 1000000]
+    n_repeats: 20
+    ci_level: 0.95
+    # Fraction of repeat CIs allowed to miss the analytical price at the
+    # largest path count (statistical coverage check, pre-declared).
+    max_miss_fraction_at_max_paths: 0.20
+    convergence_atol: 0.15       # |MC mean - BS| tolerance at 10^6 paths (in price units)
+  seeds: [0, 1, 2, 3, 4]

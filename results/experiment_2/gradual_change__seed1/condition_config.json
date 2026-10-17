@@ -1,0 +1,4 @@
+{
+  "name": "gradual_change",
+  "scenario": "synthetic/gradual_change.yaml"
+}

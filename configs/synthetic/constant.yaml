@@ -1,0 +1,41 @@
+# Scenario A — constant volatility (development / Gate 5 scenario).
+# All values are annualised, continuously compounded, in price units of the spot.
+synthetic:
+  scenario: constant
+  n_dates: 120
+  start_date: "2025-01-01"
+  underlying: SYNTH
+  currency: USD
+  option_type: call
+  # Underlying spot process (market clock). This noise is INDEPENDENT of the
+  # option-pricing volatility schedule: realized spot dynamics and the
+  # risk-neutral pricing volatility are distinct objects.
+  spot:
+    s0: 100.0
+    drift_annual: 0.03
+    realized_vol_annual: 0.10
+  # Risk-free rate: constant across dates in the core scenario.
+  rate_schedule:
+    kind: constant
+    value: 0.05
+  # Pricing volatility schedule (ground truth for calibration).
+  vol_schedule:
+    kind: constant
+    value: 0.20
+  # Contract grid per observation date.
+  maturities: [0.10, 0.25, 0.50, 0.75, 1.00]   # year fractions (ACT/365.25)
+  moneyness:
+    min: 0.85
+    max: 1.15
+    n: 9
+  # Observation noise added to theoretical prices.
+  noise:
+    mode: none                # none | relative_gaussian
+    relative_std: 0.0
+  # Synthetic bid/ask (diagnostic only; spreads are generated around the
+  # OBSERVED price so that mid == observed price).
+  spreads:
+    relative: 0.01
+    absolute: 0.05
+  # Optional random observation dropout (fraction of quotes removed).
+  observation_dropout: 0.0

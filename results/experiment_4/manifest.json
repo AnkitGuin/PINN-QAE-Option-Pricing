@@ -1,0 +1,28 @@
+{
+  "experiment": "experiment_4",
+  "dataset_version": "/home/user/pinn-qae-option-pricing/data/synthetic/constant_seed0_f3bb3485931c_observations.csv",
+  "config_hash": "16e6f1719ffe27fb10fbdf101a03b583dd2c17aa43dbac603003acb9f7492120",
+  "seed": 42,
+  "device": "cpu",
+  "status": "completed",
+  "environment": {
+    "timestamp_utc": "2026-10-17T09:49:34.542142+00:00",
+    "python": "3.13.16",
+    "platform": "Linux-6.1.158+-x86_64-with-glibc2.41",
+    "machine": "x86_64",
+    "processor": "",
+    "cpu_count": 2,
+    "seed": 42,
+    "numpy": "2.3.5",
+    "scipy": "1.17.1",
+    "pandas": "2.2.3",
+    "torch": null,
+    "torch_load_error": "OSError",
+    "qiskit": "2.6.0",
+    "qiskit_aer": "0.17.2"
+  },
+  "runtime_seconds": 11.875700439999491,
+  "n_contracts": 3,
+  "n_inputs": 4,
+  "depends_on": "results/experiment_2 (constant_clean seed 0 artifacts)"
+}
